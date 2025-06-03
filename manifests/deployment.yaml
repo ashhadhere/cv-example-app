@@ -1,0 +1,24 @@
+# kubernetes/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cv-example-app-deployment
+  labels:
+    app: cv-example-app
+spec:
+  replicas: 1 # Start with 1 replica for initial testing
+  selector:
+    matchLabels:
+      app: cv-example-app
+  template:
+    metadata:
+      labels:
+        app: cv-example-app
+    spec:
+      containers:
+      - name: cv-example-app-container
+        # IMPORTANT: Replace 'yourdockerhubusername' with your actual DockerHub username
+        # and ensure 'maven-java-app' is the correct image name you pushed.
+        image: ashhadhere/upworkproject:latest
+        ports:
+        - containerPort: 8080 # This should match the port your Java app listens on (e.g., Spring Boot default)
